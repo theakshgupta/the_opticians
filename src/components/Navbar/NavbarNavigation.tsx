@@ -94,9 +94,9 @@ const EyeglassesDropdown: FC = () => (
           <MegaMenuColumn
             heading="Gender"
             items={[
-              { label: "Men", href: "/" },
-              { label: "Women", href: "/" },
-              { label: "Kids", href: "/" },
+              { label: "Men", href: "/shop/gender/men" },
+              { label: "Women", href: "/shop/gender/women" },
+              { label: "Kids", href: "/shop/gender/kids" },
             ]}
           />
           <MegaMenuColumn
@@ -127,8 +127,6 @@ const EyeglassesDropdown: FC = () => (
               { label: "Fully Rimmed", href: "/" },
               { label: "Half Rimmed", href: "/" },
               { label: "Rimless", href: "/" },
-              { label: "Geometric", href: "/" },
-              { label: "Wayfarer", href: "/" },
             ]}
           />
         </div>
@@ -145,18 +143,18 @@ const EyeglassesDropdown: FC = () => (
         <MegaMenuColumn
           heading="Brands"
           items={[
-            { label: "RayBan", href: "/" },
-            { label: "Tommy Hilfiger", href: "/" },
-            { label: "Vogue", href: "/" },
-            { label: "Carrera", href: "/" },
-            { label: "Guess", href: "/" },
-            { label: "Calvin Klein", href: "/" },
-            { label: "Diesel", href: "/" },
-            { label: "Pierre Cardin", href: "/" },
-            { label: "Seventh Street", href: "/" },
-            { label: "Killer", href: "/" },
-            { label: "French Connection", href: "/" },
-            { label: "Lee Cooper", href: "/" },
+            { label: "RayBan", href: "/shop/brands/rayban" },
+            { label: "Tommy Hilfiger", href: "/shop/brands/tommy-hilfiger" },
+            { label: "Vogue", href: "/shop/brands/vogue" },
+            { label: "Carrera", href: "/shop/brands/carrera" },
+            { label: "Guess", href: "/shop/brands/guess" },
+            { label: "Calvin Klein", href: "/shop/brands/calvin-klein" },
+            { label: "Diesel", href: "/shop/brands/diesel" },
+            { label: "Pierre Cardin", href: "/shop/brands/pierre-cardin" },
+            { label: "Seventh Street", href: "/shop/brands/seventh-street" },
+            { label: "Killer", href: "/shop/brands/killer" },
+            { label: "French Connection", href: "/shop/brands/french-connection" },
+            { label: "Lee Cooper", href: "/shop/brands/lee-cooper" },
           ]}
         />
       </div>

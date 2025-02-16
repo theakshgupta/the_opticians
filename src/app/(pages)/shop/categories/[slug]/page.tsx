@@ -4,8 +4,9 @@ import { useParams } from "next/navigation";
 import useSWR from "swr";
 import BreadcrumbSection from "@/components/BreadcrumbSection";
 import FilterSection from "@/components/FilterSection";
-import Image from "next/image";
 import ProductCard from "@/components/Products/ProductCard";
+import BannerImage from "@/components/BannerImage";
+import Image from "next/image";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -46,26 +47,28 @@ const listPage = () => {
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Shop", href: "/shop" },
-          { label: formattedCategory, href: `/shop/${slug}` },
+          { label: "Categories", href: "/shop/categories" },
+          { label: formattedCategory, href: `/shop/categories/${slug}` },
         ]}
       />
 
       {/* Hero Image */}
-      <div className="w-full my-5 rounded-2xl border max-h-[55vh] overflow-hidden">
+      <div className="relative w-full h-40 md:h-60 lg:h-80 xl:h-96 my-5 rounded-2xl border max-h-[55vh] overflow-hidden">
         <Image
           src="/shop-list.jpg"
-          alt={`${formattedCategory} Hero`}
-          width={1920}
-          height={1080}
+          alt="Shop Banner"
+          fill
           priority
-          className="rounded-2xl"
+          className="rounded-2xl object-cover"
         />
       </div>
 
       <FilterSection />
 
       <div className="w-full h-full">
-        <h1 className="text-5xl font-medium my-5">{formattedCategory}</h1>
+        <h1 className="text-4xl md:text-5xl font-medium my-5">
+          {formattedCategory}
+        </h1>
 
         {isLoading ? (
           <p>Loading products...</p>
@@ -93,6 +96,6 @@ const listPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default listPage;

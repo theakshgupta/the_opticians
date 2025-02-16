@@ -5,6 +5,7 @@ import ExploreByColors from "@/components/Homepage/ExploreByColors";
 import NewArrivals from "@/components/Homepage/NewArrivals";
 import CollectionsSection from "@/components/Homepage/CollectionsSection";
 import BestSellers from "@/components/Homepage/BestSellers";
+import ShopByGenderSection from "@/components/ShopByGenderSection";
 import BlogSection from "@/components/Homepage/BlogSection";
 import Testimonials from "@/components/Homepage/TestimonialsSection";
 import BrandsSection from "@/components/Homepage/BrandsSection";
@@ -20,6 +21,7 @@ const HomePage = () => {
       <NewArrivals />
       <CollectionsSection />
       <BestSellers />
+      <ShopByGenderSection />
       <BlogSection />
       <Testimonials />
       <BrandsSection />

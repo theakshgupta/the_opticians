@@ -4,8 +4,8 @@ import { useParams } from "next/navigation";
 import useSWR from "swr";
 import BreadcrumbSection from "@/components/BreadcrumbSection";
 import FilterSection from "@/components/FilterSection";
-import Image from "next/image";
 import ProductCard from "@/components/Products/ProductCard";
+import BannerImage from "@/components/BannerImage";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -46,21 +46,12 @@ const listPage = () => {
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Shop", href: "/shop" },
-          { label: formattedCategory, href: `/shop/${slug}` },
+          { label: "Gender", href: "/shop/gender" },
+          { label: formattedCategory, href: `/shop/gender/${slug}` },
         ]}
       />
 
-      {/* Hero Image */}
-      <div className="w-full my-5 rounded-2xl border max-h-[55vh] overflow-hidden">
-        <Image
-          src="/shop-list.jpg"
-          alt={`${formattedCategory} Hero`}
-          width={1920}
-          height={1080}
-          priority
-          className="rounded-2xl"
-        />
-      </div>
+      <BannerImage />
 
       <FilterSection />
 
@@ -93,6 +84,6 @@ const listPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default listPage;

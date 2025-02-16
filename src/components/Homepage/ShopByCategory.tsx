@@ -1,27 +1,28 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
 const ShopByCategory = () => {
   const topCategory = {
     title: "Eyeglasses",
     description: "Lorem ipsum dolor sit amet consectetur.",
-    imageSrc: "/categories/category1.png",
-    link: "/shop/category/eyeglasses",
+    imageSrc: "/categories/eyeglasses.png",
+    link: "/shop/categories/eyeglasses",
   };
 
   const topSmallCategories = [
     {
       title: "Sunglasses",
       description: "Lorem ipsum dolor sit amet consectetur.",
-      imageSrc: "/categories/category2.png",
-      link: "/shop/category/sunglasses",
+      imageSrc: "/categories/sunglasses.png",
+      link: "/shop/categories/sunglasses",
     },
     {
       title: "Contact Lens",
       description: "Lorem ipsum dolor sit amet consectetur.",
-      imageSrc: "/categories/category3.png",
-      link: "/shop/category/contact-lens",
+      imageSrc: "/categories/contact-lens.png",
+      link: "/shop/categories/contact-lens",
     },
   ];
 
@@ -29,21 +30,28 @@ const ShopByCategory = () => {
     {
       title: "Computer Glasses",
       description: "Lorem ipsum dolor sit amet consectetur.",
-      imageSrc: "/categories/category4.png",
-      link: "/shop/category/computer-glasses",
+      imageSrc: "/categories/computer-glasses.png",
+      link: "/shop/categories/computer-glasses",
     },
     {
       title: "Reading Glasses",
       description: "Lorem ipsum dolor sit amet consectetur.",
-      imageSrc: "/categories/category5.png",
-      link: "/shop/category/reading-glasses",
+      imageSrc: "/categories/reading-glasses.png",
+      link: "/shop/categories/reading-glasses",
     },
   ];
 
   return (
-    <div className="mx-5 my-16 md:mx-10 lg:mx-16 flex flex-col gap-2 md:gap-4">
-      <h1 className="text-4xl font-medium md:text-5xl">Shop By Category</h1>
-      
+    <div className="px-5 py-16 md:px-10 lg:px-16 flex flex-col gap-2 md:gap-4">
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-medium md:text-5xl">Shop By Category</h1>
+        <Link href="/shop/categories">
+          <Button className="h-8 md:h-11 w-8 md:w-11">
+            <ArrowUpRight style={{ width: 20, height: 20 }} />
+          </Button>
+        </Link>
+      </div>
+
       {/* Top Section: Big Category on Left & Two Small Categories on Right */}
       <div className="flex flex-col md:flex-row w-full h-full gap-2 xl:gap-4 mt-2">
         {/* Big Category */}
@@ -55,7 +63,9 @@ const ShopByCategory = () => {
             className="object-cover rounded-2xl"
           />
           <div className="w-3/5 md:w-2/5 p-3 absolute top-3 left-3 lg:top-5 lg:left-5 flex flex-col border border-gray-200 bg-white/60 backdrop-blur-md shadow-md rounded-lg gap-1">
-            <h2 className="text-xl md:text-2xl font-medium">{topCategory.title}</h2>
+            <h2 className="text-xl md:text-2xl font-medium">
+              {topCategory.title}
+            </h2>
             <p className="text-sm md:text-base font-light leading-4">
               {topCategory.description}
             </p>
@@ -79,7 +89,9 @@ const ShopByCategory = () => {
                 className="object-cover rounded-2xl"
               />
               <div className="w-3/5 md:w-4/5 lg:w-3/5 p-3 border border-gray-200 bg-white/60 backdrop-blur-md shadow-md absolute top-3 left-3 lg:top-5 lg:left-5 flex flex-col rounded-lg gap-1">
-                <h2 className="text-base md:text-xl font-medium">{category.title}</h2>
+                <h2 className="text-base md:text-xl font-medium">
+                  {category.title}
+                </h2>
                 <p className="text-xs md:text-sm font-light leading-4">
                   {category.description}
                 </p>

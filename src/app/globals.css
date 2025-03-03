@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Box Sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Base Layer: Global Variables and Base Styles */
+@layer base {
+  :root {
+    /* --- Light Theme Variables --- */
+    /* Colors */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    /* Semantic Colors */
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Borders & Inputs */
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+
+    /* Charts */
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+
+    /* Radius */
+    --radius: 0.5rem;
+
+    /* Selection */
+    --selection-bg: #222;
+    --selection-text: aliceblue;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Scrollbar Variables */
+    --scrollbar-width: 8px;
+    --scrollbar-track-bg: #f1f1f1;
+    --scrollbar-thumb-bg: #bebebe;
+    --scrollbar-corner-bg: #f1f1f1;
+  }
+
+  /* Dark Theme Variables */
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --selection-bg: hsl(340, 70%, 45%);
+    --selection-text: hsl(0, 0%, 98%);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Scrollbar Variables for Dark Mode */
+    --scrollbar-track-bg: #2d3748; /* Darker track for contrast */
+    --scrollbar-thumb-bg: #718096; /* Lighter thumb for visibility */
+    --scrollbar-corner-bg: #2d3748;
+  }
+
+  /* Global Selection Styles */
+  ::selection {
+    background-color: var(--selection-bg);
+    color: var(--selection-text);
+  }
+
+  /* Global Typography and Layout */
+  body {
+    @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))] tracking-tight;
+    font-family: var(--font-poppins, sans-serif);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  /* Default Border Color */
+  * {
+    @apply border-[hsl(var(--border))] tracking-tight;
+  }
+
+  h1 {
+    font-family: Helvetica, sans-serif;
+  }
+
+  span {
+    font-family: var(--font-poppins, sans-serif);
+  }
+
+  /* Custom Scrollbar Styles */
+  ::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+    height: var(--scrollbar-width);
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track-bg);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-bg);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background-color: var(--scrollbar-corner-bg);
+  }
+
+  /* Hide Scrollbars on Mobile and Tablet (max-width: 768px) */
+  @media (max-width: 768px) {
+    ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
+}
+
+/* Components Layer: Reusable Component Styles */
+@layer components {
+  .listItem {
+    @apply text-base text-gray-700 font-light transition-colors duration-200 hover:text-black hover:underline;
+  }
+}
+
+/* Utilities Layer: Custom Utility Classes */
+@layer utilities {
+  .input-phone {
+    @apply mt-2 h-11 rounded-md px-3 text-sm border bg-[hsl(var(--input))] placeholder:text-[hsl(var(--muted-foreground))] border-[hsl(var(--input))];
+  }
+}
+
+/* Animation Utilities */
+.fade-in-right,
+.fade-in-left {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.5s ease, transform 0.25s ease-in-out;
+}
+
+.fade-out-right,
+.fade-out-left {
+  opacity: 0;
+  transform: translateX(0%);
+  transition: opacity 0.5s ease, transform 0.25s ease-in-out;
+}
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  --_g: no-repeat radial-gradient(farthest-side,#000065 94%,#0000);
+  background:
+    var(--_g) 0    0,
+    var(--_g) 100% 0,
+    var(--_g) 100% 100%,
+    var(--_g) 0    100%;
+  background-size: 35% 35%;
+  animation: l38 .5s infinite; 
+}
+@keyframes l38 {
+  100% {background-position: 100% 0,100% 100%,0 100%,0 0}
+}

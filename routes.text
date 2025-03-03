@@ -1,0 +1,92 @@
+the-opticians/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx             # Root layout (shared header, footer, etc.)
+│   │   ├── page.tsx               # Homepage (e.g., /)
+│   │   ├── (shop)/                # Route group for shopping-related pages
+│   │   │   ├── layout.tsx         # Shared layout for shop (e.g., category filters)
+│   │   │   ├── page.tsx           # Main shop page (e.g., /shop - all products)
+│   │   │   ├── [category]/        # Dynamic route for categories (e.g., glasses, sunglasses, contacts)
+│   │   │   │   ├── page.tsx       # Category listing (e.g., /glasses)
+│   │   │   │   └── [slug]/        # Dynamic route for individual products
+│   │   │   │       └── page.tsx   # Product detail (e.g., /glasses/aviator-glasses)
+│   │   │   ├── gender/            # Gender-specific shopping section
+│   │   │   │   ├── page.tsx       # Gender landing page (e.g., /gender)
+│   │   │   │   ├── [type]/        # Dynamic route for gender types (e.g., men, women)
+│   │   │   │   │   ├── page.tsx   # Gender listing (e.g., /gender/men)
+│   │   │   │   │   └── [slug]/    # Dynamic route for individual gender products
+│   │   │   │   │       └── page.tsx # Product detail (e.g., /gender/men/aviator-glasses)
+│   │   │   └── sale/              # Sale section
+│   │   │       └── page.tsx       # Sale products (e.g., /sale)
+│   │   ├── (account)/             # Route group for user account pages
+│   │   │   ├── layout.tsx         # Shared layout for account (e.g., sidebar)
+│   │   │   ├── login/             # Login page
+│   │   │   │   └── page.tsx       # /login
+│   │   │   ├── register/          # Registration page
+│   │   │   │   └── page.tsx       # /register
+│   │   │   └── dashboard/         # User dashboard
+│   │   │       ├── page.tsx       # Dashboard main (e.g., /dashboard)
+│   │   │       ├── orders/        # Order history
+│   │   │       │   └── page.tsx   # /dashboard/orders
+│   │   │       └── wishlist/      # Wishlist
+│   │   │           └── page.tsx   # /dashboard/wishlist
+│   │   ├── (content)/             # Route group for static content
+│   │   │   ├── layout.tsx         # Shared layout for content (e.g., minimal footer)
+│   │   │   ├── about/             # About page
+│   │   │   │   └── page.tsx       # /about
+│   │   │   ├── contact/           # Contact page
+│   │   │   │   └── page.tsx       # /contact
+│   │   │   ├── faq/               # FAQs page
+│   │   │   │   └── page.tsx       # /faq
+│   │   │   ├── terms/             # Terms and conditions
+│   │   │   │   └── page.tsx       # /terms
+│   │   │   └── privacy/           # Privacy policy
+│   │   │       └── page.tsx       # /privacy
+│   │   ├── (blog)/                # Route group for blog
+│   │   │   ├── layout.tsx         # Shared layout for blog (e.g., sidebar)
+│   │   │   ├── page.tsx           # Blog listing (e.g., /blog)
+│   │   │   └── [slug]/            # Dynamic route for blog posts
+│   │   │       └── page.tsx       # Blog post (e.g., /blog/latest-trends)
+│   │   ├── (checkout)/            # Route group for checkout flow
+│   │   │   ├── layout.tsx         # Shared layout for checkout
+│   │   │   ├── cart/              # Shopping cart
+│   │   │   │   └── page.tsx       # /cart
+│   │   │   └── checkout/          # Checkout process
+│   │   │       └── page.tsx       # /checkout
+│   │   └── api/                   # API routes
+│   │       ├── auth/              # Authentication endpoints
+│   │       │   ├── login/route.ts # POST /api/auth/login
+│   │       │   └── register/route.ts # POST /api/auth/register
+│   │       ├── products/          # Product endpoints
+│   │       │   ├── get/route.ts   # GET /api/products/get
+│   │       │   └── search/route.ts # GET /api/products/search
+│   │       ├── cart/              # Cart endpoints
+│   │       │   └── route.ts       # POST/GET /api/cart
+│   │       └── orders/            # Order endpoints
+│   │           └── route.ts       # POST/GET /api/orders
+│   ├── components/                # Reusable components
+│   │   ├── ui/                    # Basic UI components
+│   │   │   ├── Button.tsx         
+│   │   │   └── Input.tsx         
+│   │   ├── layout/                # Layout components
+│   │   │   ├── Header.tsx         
+│   │   │   ├── Footer.tsx         
+│   │   │   └── Navigation.tsx     
+│   │   ├── shop/                  # Shop-specific components
+│   │   │   ├── ProductCard.tsx    
+│   │   │   └── ProductGallery.tsx 
+│   │   ├── account/               # Account-specific components
+│   │   │   ├── LoginForm.tsx      
+│   │   │   └── RegisterForm.tsx   
+│   │   └── checkout/              # Checkout-specific components
+│   │       ├── CartItem.tsx       
+│   │       └── CheckoutForm.tsx   
+│   ├── styles/                    # Styling
+│   │   └── globals.css            # Global styles
+│   ├── utils/                     # Utility functions
+│   │   ├── api.ts                 # API fetch helpers
+│   │   └── helpers.ts             # General helpers
+│   └── public/                    # Static assets
+│       ├── images/                # Product images, logos
+│       └── fonts/                 # Custom fonts
+└── package.json                   # Dependencies and scripts

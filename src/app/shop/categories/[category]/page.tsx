@@ -6,6 +6,7 @@ import BreadcrumbSection from "@/components/BreadcrumbSection";
 import FilterSection from "@/components/FilterSection";
 import ProductCard from "@/components/Products/ProductCard";
 import BannerImage from "@/components/BannerImage";
+import Image from "next/image";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -43,7 +44,16 @@ const ListPage = () => {
         ]}
       />
 
-      <BannerImage />
+      {/* Hero Image */}
+      <div className="relative w-full h-40 md:h-60 lg:h-80 xl:h-96 my-5 rounded-2xl border max-h-[55vh] overflow-hidden">
+        <Image
+          src="/shop-list.jpg"
+          alt="Shop Banner"
+          fill
+          priority
+          className="rounded-2xl object-cover"
+        />
+      </div>
 
       <FilterSection />
 

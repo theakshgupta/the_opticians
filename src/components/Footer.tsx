@@ -3,6 +3,61 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import React from "react";
 
+// Constants defined outside the component
+const currentYear = new Date().getFullYear();
+
+const socialMedia = [
+  { name: "Instagram", href: "https://instagram.com/theopticians18/", icon: "/icons/social-media/instagram.svg" },
+  { name: "Facebook", href: "https://facebook.com/theopticians.in/", icon: "/icons/social-media/facebook.svg" },
+  { name: "YouTube", href: "https://www.youtube.com/@theopticians18", icon: "/icons/social-media/youtube.svg" },
+  { name: "X (Twitter)", href: "/", icon: "/icons/social-media/x.svg" },
+];
+
+const genderLinks = [
+  { name: "Men", href: "/shop/gender/men" },
+  { name: "Women", href: "/shop/gender/women" },
+  { name: "Kids", href: "/shop/gender/kids" },
+];
+
+const topPicks = [
+  { name: "New Arrivals", href: "/shop/new-arrivals" },
+  { name: "Best Sellers", href: "/shop/best-sellers" },
+  { name: "Turban Eyewear", href: "/shop/turban-eyewear" },
+  { name: "Computer Glasses", href: "/shop/computer-glasses" },
+  { name: "Progressive Glasses", href: "/shop/progressive-glasses" },
+  { name: "Day Night Glasses", href: "/shop/day-night-glasses" },
+  { name: "Powered Sunglasses", href: "/shop/powered-sunglasses" },
+];
+
+const eyeglasses = [
+  { name: "Blue Light Glasses", href: "/shop/eyeglasses/blue-light-glasses" },
+  { name: "Anti-Glare Glasses", href: "/shop/eyeglasses/anti-glare-glasses" },
+  { name: "Day Night Glasses", href: "/shop/eyeglasses/day-night-glasses" },
+  { name: "Progressive Glasses", href: "/shop/eyeglasses/progressive-glasses" },
+  { name: "Turban Glasses", href: "/shop/eyeglasses/turban-glasses" },
+  { name: "Reading Glasses", href: "/shop/eyeglasses/reading-glasses" },
+  { name: "Collections", href: "/shop/eyeglasses/collections" },
+];
+
+const sunglasses = [
+  { name: "Aviator Sunglasses", href: "/shop/sunglasses/aviator-sunglasses" },
+  { name: "Wayfarer Sunglasses", href: "/shop/sunglasses/wayfarer-sunglasses" },
+  { name: "Bold Sunglasses", href: "/shop/sunglasses/bold-sunglasses" },
+  { name: "Powered Sunglasses", href: "/shop/sunglasses/powered-sunglasses" },
+  { name: "Sporty Sunglasses", href: "/shop/sunglasses/sporty-sunglasses" },
+  { name: "Collections", href: "/shop/sunglasses/collections" },
+];
+
+const contactLens = [
+  { name: "Daily Disposable", href: "/shop/contact-lens/daily-disposable" },
+  { name: "Monthly Disposable", href: "/shop/contact-lens/monthly-disposable" },
+  { name: "Cosmetic Lenses", href: "/shop/contact-lens/cosmetic-lenses" },
+  { name: "Toric Lenses (Astigmatism)", href: "/shop/contact-lens/toric-lenses" },
+  { name: "Multifocal Lenses", href: "/shop/contact-lens/multifocal-lenses" },
+  { name: "Lens Solution", href: "/shop/contact-lens/lens-solution" },
+];
+
+// LinkList Component (Updated)
 type LinkListProps = {
   title: string;
   links: { name: string; href: string }[];
@@ -13,7 +68,7 @@ const LinkList: React.FC<LinkListProps> = ({ title, links }) => (
     <h2 className="font-medium text-lg">{title}</h2>
     <ul className="flex flex-col gap-1 md:gap-2">
       {links.map((link) => (
-        <li key={link.href} className="listItem">
+        <li key={link.name} className="listItem">
           <Link href={link.href}>{link.name}</Link>
         </li>
       ))}
@@ -21,6 +76,7 @@ const LinkList: React.FC<LinkListProps> = ({ title, links }) => (
   </div>
 );
 
+// SocialButton Component
 type SocialButtonProps = {
   href: string;
   imgSrc: string;
@@ -29,169 +85,64 @@ type SocialButtonProps = {
 
 const SocialButton: React.FC<SocialButtonProps> = ({ href, imgSrc, alt }) => (
   <Link href={href} target="_blank" rel="noopener noreferrer">
-    <Button
-      className="rounded-full w-9 h-9 p-2 hover:bg-[#000065]"
-      aria-label={alt}
-    >
-      <Image src={imgSrc} width={50} height={50} alt={alt} />
+    <Button className="rounded-full w-9 h-9 p-2 hover:bg-[#000065]" aria-label={alt}>
+      <Image src={imgSrc} width={20} height={20} alt={alt} className="w-5 h-5" />
     </Button>
   </Link>
 );
 
-const currentYear = new Date().getFullYear();
-
-const MapEmbed: React.FC = () => (
-  <div className="h-80 w-full md:w-[30vw]">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3400.7306826961194!2d75.90270907561204!3d31.531556074208815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a5a6439feec7f%3A0x5a37b2d5e4afd12c!2sThe%20Opticians%20-%20Optometrist!5e0!3m2!1sen!2sin!4v1735830765419!5m2!1sen!2sin"
-      className="w-full h-full min-w-60 rounded-2xl"
-      title="The Opticians Location"
-      loading="lazy"
-    ></iframe>
+// SocialButtons Component
+const SocialButtons: React.FC = () => (
+  <div className="flex gap-1">
+    {socialMedia.map((social) => (
+      <SocialButton key={social.name} href={social.href} imgSrc={social.icon} alt={social.name} />
+    ))}
   </div>
 );
 
-const FooterDesktop: React.FC = () => (
-  <div className="hidden md:flex w-full flex-col gap-2 border-t mt-5 pt-5">
-    <div className="flex justify-between items-center">
-      <Image src="/logo/Logo.svg" width={250} height={100} alt="logo" />
-      <div className="flex gap-1">
-        <SocialButton
-          href="https://instagram.com/theopticians18/"
-          imgSrc="/icons/social-media/instagram.svg"
-          alt="Instagram"
-        />
-        <SocialButton
-          href="https://facebook.com/theopticians.in/"
-          imgSrc="/icons/social-media/facebook.svg"
-          alt="Facebook"
-        />
-        <SocialButton
-          href="https://www.youtube.com/@theopticians18"
-          imgSrc="/icons/social-media/youtube.svg"
-          alt="YouTube"
-        />
-        <SocialButton href="/" imgSrc="/icons/social-media/x.svg" alt="X (Twitter)" />
-      </div>
+// LegalSection Component
+const LegalSection: React.FC = () => (
+  <div className="flex flex-col md:flex-row md:justify-between md:items-center md:h-10 md:bg-gray-50 md:border md:px-5 md:py-2 md:rounded-lg text-sm">
+    <div className="flex justify-between w-full md:w-auto md:gap-4">
+      <Link href="/" className="listItem text-black">
+        Privacy Policy
+      </Link>
+      <Link href="/" className="listItem text-black">
+        Terms & Conditions
+      </Link>
     </div>
-    <div className="mt-2">
-      <div className="h-10 bg-gray-200 px-5 py-2 rounded-lg text-sm flex justify-between items-center">
-        <div className="flex gap-4">
-          <Link href="/" className="listItem text-black">
-            Privacy Policy
-          </Link>
-          <Link href="/" className="listItem text-black">
-            Terms &amp; Conditions
-          </Link>
-        </div>
-        <p>© {currentYear} The Opticians. All rights reserved.</p>
-      </div>
-    </div>
+    <p className="mt-4 md:mt-0">© {currentYear} The Opticians. All rights reserved.</p>
   </div>
 );
 
-const FooterMobile: React.FC = () => (
-  <div className="flex md:hidden w-full flex-col gap-2 border-t">
-    <div className="h-44 flex flex-col justify-center gap-2 border-b">
-      <h1 className="mt-3 text-4xl font-medium">Follow Us On Social Media</h1>
-      <div className="my-1 flex gap-1">
-        <SocialButton
-          href="https://instagram.com/theopticians18/"
-          imgSrc="/instagram.svg"
-          alt="Instagram"
-        />
-        <SocialButton
-          href="https://facebook.com/theopticians.in/"
-          imgSrc="/facebook.svg"
-          alt="Facebook"
-        />
-        <SocialButton
-          href="https://www.youtube.com/@theopticians18"
-          imgSrc="/youtube.svg"
-          alt="YouTube"
-        />
-        <SocialButton href="/" imgSrc="/x.svg" alt="X (Twitter)" />
+// Footer Component
+const Footer: React.FC = () => (
+  <footer className="border-t px-5 pt-10 pb-4 md:px-10 lg:px-16 lg:pt-16 flex flex-col gap-10">
+    {/* Link Lists Section */}
+    <div className="flex flex-col md:flex-row justify-between md:gap-28 lg:gap-10">
+      <div className="flex flex-wrap lg:flex-nowrap gap-10 md:gap-14 lg:gap-20 xl:gap-28">
+        <LinkList title="Gender" links={genderLinks} />
+        <LinkList title="Our Top Picks" links={topPicks} />
+        <LinkList title="Eyeglasses" links={eyeglasses} />
+        <LinkList title="Sunglasses" links={sunglasses} />
+        <LinkList title="Contact Lens" links={contactLens} />
       </div>
     </div>
-    <div className="w-full">
-      <div className="h-max w-full text-sm flex justify-between items-center">
-        <div className="w-full flex flex-col items-center gap-4">
-          <div className="flex justify-between w-full border-b my-2 pb-4">
-            <Link href="/" className="listItem text-black">
-              Privacy Policy
-            </Link>
-            <Link href="/" className="listItem text-black">
-              Terms &amp; Conditions
-            </Link>
-          </div>
-          <p>© {currentYear} The Opticians. All rights reserved.</p>
+
+    {/* Bottom Section */}
+    <div className="mt-5 pt-5 border-t">
+      <div className="md:flex justify-between items-center gap-4">
+        <Image src="/logo/Logo.svg" width={250} height={100} alt="logo" className="hidden md:block" />
+        <div className="flex flex-col items-center w-full md:w-auto md:items-end border-b md:border-none pb-4 md:pb-0">
+          <h1 className="mt-3 text-4xl font-medium md:hidden">Follow Us On Social Media</h1>
+          <SocialButtons />
         </div>
       </div>
+      <div className="mt-4 md:mt-2">
+        <LegalSection />
+      </div>
     </div>
-  </div>
+  </footer>
 );
-
-const Footer: React.FC = () => {
-  const genderLinks = [
-    { name: "Men", href: "/" },
-    { name: "Women", href: "/" },
-    { name: "Kids", href: "/" },
-  ];
-
-  const topPicks = [
-    { name: "New Arrivals", href: "/" },
-    { name: "Best Sellers", href: "/" },
-    { name: "Turban Eyewear", href: "/" },
-    { name: "Computer Glasses", href: "/" },
-    { name: "Progressive Glasses", href: "/" },
-    { name: "Day Night Glasses", href: "/" },
-    { name: "Powered Sunglasses", href: "/" },
-  ];
-
-  const eyeglasses = [
-    { name: "Blue Light Glasses", href: "/" },
-    { name: "Anti-Glare Glasses", href: "/" },
-    { name: "Day Night Glasses", href: "/" },
-    { name: "Progressive Glasses", href: "/" },
-    { name: "Turban Glasses", href: "/" },
-    { name: "Reading Glasses", href: "/" },
-    { name: "Collections", href: "/" },
-  ];
-
-  const sunglasses = [
-    { name: "Aviator Sunglasses", href: "/" },
-    { name: "Wayfarer Sunglasses", href: "/" },
-    { name: "Bold Sunglasses", href: "/" },
-    { name: "Powered Sunglasses", href: "/" },
-    { name: "Sporty Sunglasses", href: "/" },
-    { name: "Collections", href: "/" },
-  ];
-
-  const contactLens = [
-    { name: "Daily Disposable", href: "/" },
-    { name: "Monthly Disposable", href: "/" },
-    { name: "Cosmetic Lenses", href: "/" },
-    { name: "Toric Lenses (Astigmatism)", href: "/" },
-    { name: "Multifocal Lenses", href: "/" },
-    { name: "Lens Solution", href: "/" },
-  ];
-
-  return (
-    <footer className="border-t px-5 pt-10 pb-4 md:px-16 md:pt-16 flex flex-col gap-10">
-      <div className="flex flex-col md:flex-row justify-between gap-10">
-        <MapEmbed />
-        <div className="flex flex-wrap lg:flex-nowrap gap-10 lg:gap-14">
-          <LinkList title="Gender" links={genderLinks} />
-          <LinkList title="Our Top Picks" links={topPicks} />
-          <LinkList title="Eyeglasses" links={eyeglasses} />
-          <LinkList title="Sunglasses" links={sunglasses} />
-          <LinkList title="Contact Lens" links={contactLens} />
-        </div>
-      </div>
-      <FooterDesktop />
-      <FooterMobile />
-    </footer>
-  );
-};
 
 export default Footer;

@@ -6,7 +6,15 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import {
+  CheckCircle,
+  AlertCircle,
+  X,
+  Mail,
+  MapPin,
+  ArrowRight,
+  Phone,
+} from "lucide-react";
 import TextareaAutosize from "react-textarea-autosize";
 
 import { Button } from "@/components/ui/button";
@@ -26,6 +34,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import Link from "next/link";
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters."),
@@ -36,10 +46,10 @@ const formSchema = z.object({
   message: z.string().min(5, "Message must be at least 5 characters long."),
 });
 
-const ContactUsPage = () => {
+const ContactPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,8 +66,8 @@ const ContactUsPage = () => {
   const onSubmit = useCallback(
     async (values: z.infer<typeof formSchema>) => {
       setIsSubmitting(true);
-      setSubmitError(null);
       setSubmitSuccess(false);
+      setSubmitError(null);
 
       try {
         const response = await fetch("/api/contact", {
@@ -71,7 +81,9 @@ const ContactUsPage = () => {
         setSubmitSuccess(true);
         form.reset();
       } catch (error) {
-        setSubmitError(error instanceof Error ? error.message : "An error occurred");
+        setSubmitError(
+          error instanceof Error ? error.message : "An error occurred"
+        );
       } finally {
         setIsSubmitting(false);
       }
@@ -83,9 +95,12 @@ const ContactUsPage = () => {
     <div className="px-5 py-10 md:px-10 lg:px-20 flex flex-col gap-5">
       {/* Header */}
       <header className="my-5">
-        <h1 className="text-4xl font-medium tracking-tight md:text-6xl">Contact Us</h1>
+        <h1 className="text-6xl font-medium tracking-tight md:text-7xl lg:text-8xl">
+          Contact Us
+        </h1>
         <p className="mt-2 text-sm md:text-base text-gray-600">
-          We’re here to help! Reach out for any questions, feedback, or assistance.
+          We’re here to help! Reach out for any questions, feedback, or
+          assistance.
         </p>
       </header>
 
@@ -177,35 +192,36 @@ const ContactUsPage = () => {
                     <FormItem>
                       <FormLabel>Reason for Contact</FormLabel>
                       <FormControl>
-                        <Select onValueChange={field.onChange} value={field.value}>
+                        <Select
+                          onValueChange={field.onChange}
+                          value={field.value}
+                        >
                           <SelectTrigger className="h-11 text-base">
                             <SelectValue placeholder="Select a reason" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem className="text-base px-3" value="orderStatus">
+                            <SelectItem value="orderStatus">
                               Order Status
                             </SelectItem>
-                            <SelectItem className="text-base px-3" value="returnsAndRefunds">
+                            <SelectItem value="returnsAndRefunds">
                               Returns & Refunds
                             </SelectItem>
-                            <SelectItem className="text-base px-3" value="paymentIssues">
+                            <SelectItem value="paymentIssues">
                               Payment Issues
                             </SelectItem>
-                            <SelectItem className="text-base px-3" value="shippingAndDelivery">
+                            <SelectItem value="shippingAndDelivery">
                               Shipping & Delivery
                             </SelectItem>
-                            <SelectItem className="text-base px-3" value="productInquiry">
+                            <SelectItem value="productInquiry">
                               Product Inquiry
                             </SelectItem>
-                            <SelectItem className="text-base px-3" value="prescriptionAssistance">
+                            <SelectItem value="prescriptionAssistance">
                               Prescription Assistance
                             </SelectItem>
-                            <SelectItem className="text-base px-3" value="complaintOrIssue">
+                            <SelectItem value="complaintOrIssue">
                               Complaint/Issue
                             </SelectItem>
-                            <SelectItem className="text-base px-3" value="other">
-                              Other
-                            </SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
                           </SelectContent>
                         </Select>
                       </FormControl>
@@ -223,8 +239,8 @@ const ContactUsPage = () => {
                     <FormLabel>Message</FormLabel>
                     <FormControl>
                       <TextareaAutosize
-                        placeholder="E.g., 'I have a question about my recent order #12345...'"
-                        className="min-h-32 resize-none text-base overflow-hidden w-full border rounded-md px-5 py-4"
+                        placeholder="Your message here..."
+                        className="min-h-32 resize-none text-base w-full border rounded-md px-3 py-2"
                         {...field}
                       />
                     </FormControl>
@@ -233,78 +249,109 @@ const ContactUsPage = () => {
                 )}
               />
 
-              <Button type="submit" className="w-full h-11" disabled={isSubmitting}>
+              <Button
+                type="submit"
+                className="w-full h-11"
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? "Submitting..." : "Submit"}
               </Button>
 
               {submitSuccess && (
-                <p className="text-green-600 mt-4">Form submitted successfully!</p>
+                <Alert variant="default" className="mt-4 relative">
+                  <CheckCircle className="h-4 w-4" />
+                  <AlertTitle>Message Sent</AlertTitle>
+                  <AlertDescription>
+                    Thank you! We’ll get back to you soon.
+                  </AlertDescription>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute top-2 right-2"
+                    onClick={() => setSubmitSuccess(false)}
+                    aria-label="Close success message"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </Alert>
               )}
               {submitError && (
-                <p className="text-red-600 mt-4">Error: {submitError}</p>
+                <Alert variant="destructive" className="mt-4 relative">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertTitle>Error</AlertTitle>
+                  <AlertDescription>{submitError}</AlertDescription>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute top-2 right-2"
+                    onClick={() => setSubmitError(null)}
+                    aria-label="Close error message"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </Alert>
               )}
             </form>
           </Form>
         </section>
-
         {/* Contact Options */}
         <aside className="w-full md:w-1/3 lg:w-[30%]">
           <div className="flex flex-col gap-6 mt-5">
             {[
               {
-                icon: <Mail size={26} />,
+                icon: <Mail size={24} />,
                 title: "Email Support",
-                desc: "Reach out and we’ll get back to you within 24 hours.",
+                desc: "We’ll respond within 24 hours.",
                 detail: (
-                  <a
+                  <Link
                     href="mailto:helpdesk@theopticians.in"
                     className="text-[#000065] text-lg font-semibold hover:underline"
                   >
                     helpdesk@theopticians.in
-                  </a>
+                  </Link>
                 ),
               },
               {
-                icon: <MapPin size={26} />,
+                icon: <MapPin size={24} />,
                 title: "Visit Our Store",
-                desc: "Explore our eyewear collection in person.",
+                desc: "See our eyewear in person.",
                 detail: (
-                  <a
-                    href="https://maps.google.com/?q=Your+Store+Address"
+                  <Link
+                    href="https://maps.google.com/?q=zsVCtSv8nqmMX7ku7"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#000065] text-lg font-semibold flex gap-2 items-center hover:underline"
+                    className="text-[#000065] text-lg font-semibold flex items-center gap-2 hover:underline"
                   >
                     Location <ArrowRight size={18} />
-                  </a>
+                  </Link>
                 ),
               },
               {
-                icon: <Phone size={26} />,
+                icon: <Phone size={24} />,
                 title: "Talk to Us",
-                desc: "Call us for immediate assistance.",
+                desc: "Call for immediate help.",
                 detail: (
-                  <a
+                  <Link
                     href="tel:+919356472227"
                     className="text-[#000065] text-lg font-semibold hover:underline"
                   >
                     +91 9356472227
-                  </a>
+                  </Link>
                 ),
               },
             ].map(({ icon, title, desc, detail }, index) => (
               <div
                 key={index}
-                className="flex flex-col gap-4 rounded-2xl border p-6 bg-gray-50"
+                className="flex flex-col gap-4 rounded-2xl border p-6 bg-gray-50 shadow-sm"
               >
-                <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-xl bg-blue-100 border border-blue-200 flex items-center justify-center text-[#000065]">
                   {icon}
                 </div>
                 <div>
-                  <h2 className="text-2xl font-medium">{title}</h2>
+                  <h2 className="text-xl font-medium">{title}</h2>
                   <p className="text-sm md:text-base text-gray-600">{desc}</p>
                 </div>
-                <span>{detail}</span>
+                {detail}
               </div>
             ))}
           </div>
@@ -314,4 +361,4 @@ const ContactUsPage = () => {
   );
 };
 
-export default ContactUsPage;
+export default ContactPage;

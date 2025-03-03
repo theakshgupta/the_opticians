@@ -1,13 +1,13 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Head from "next/head";
 import { createClient, media, OAuthStrategy } from "@wix/sdk";
 import { items as itemsSDK } from "@wix/data";
-
-import React from "react";
 import RichContentViewer from "@/components/RichContentViewer";
-import { getRichContent } from "@/lib/rich-content-api";
 
+// Define the BlogPost interface
 interface BlogPost {
   _id: string;
   blogTitle: string;
@@ -16,6 +16,7 @@ interface BlogPost {
   blogContent: string;
 }
 
+// Initialize the Wix client
 const wixClient = createClient({
   modules: { items: itemsSDK },
   auth: OAuthStrategy({
@@ -23,18 +24,35 @@ const wixClient = createClient({
   }),
 });
 
-const SingleBlog = async () => {
-  const richContent = await getRichContent();
+// Define props to receive the dynamic route parameter
+interface SingleBlogProps {
+  params: { blog: string };
+}
 
-  const { items } = await wixClient.items.query("blog_posts").find();
+// Server component to fetch and display a single blog post
+const SingleBlog = async ({ params }: SingleBlogProps) => {
+  // Extract the blog ID from the URL parameter
+  const blogId = params.blog;
+
+  // Fetch the specific blog post by its _id
+  const { items } = await wixClient.items
+    .query("blog_posts")
+    .eq("_id", blogId)
+    .find();
+
+  // Handle case where no blog post is found
   if (!items || items.length === 0) {
     return (
       <div className="w-full min-h-screen flex items-center justify-center">
-        <p className="text-xl">No blog post found</p>
+        <p className="text-xl">Blog post not found</p>
       </div>
     );
   }
+
+  // Cast the fetched item to BlogPost (since we expect one item)
   const blogData = items[0] as BlogPost;
+
+  // Generate a scaled image URL
   const scaledImageUrl = media.getScaledToFillImageUrl(
     blogData.blogImage,
     1200,
@@ -42,6 +60,7 @@ const SingleBlog = async () => {
     {}
   );
 
+  // Render the blog post
   return (
     <>
       <Head>
@@ -72,7 +91,7 @@ const SingleBlog = async () => {
         <main className="flex flex-col md:flex-row items-center justify-center gap-6">
           <article className="w-full md:w-[80%] lg:w-[70%] xl:w-[60%] flex flex-col gap-8">
             <section className="flex flex-col gap-4 mt-10">
-              <RichContentViewer content={richContent} />
+              <RichContentViewer richContent={(blogData.blogContent)} />
             </section>
           </article>
         </main>

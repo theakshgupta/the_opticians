@@ -1,13 +1,20 @@
-"use client";
+import { RicosViewer } from "ricos-viewer";
+import { RichContent } from "ricos-schema";
+import { toDraft } from "ricos-content/libs/toDraft";
+import { pluginDivider } from "wix-rich-content-plugin-divider/viewer";
+import { pluginHeadings } from "wix-rich-content-plugin-headings/viewer";
+import { pluginImage } from "wix-rich-content-plugin-image/viewer";
 
-import React from "react";
-import { quickStartViewerPlugins, RicosViewer } from "@wix/ricos";
-import "@wix/ricos/css/all-plugins-viewer.css";
+const plugins = [
+  pluginDivider({
+    size: "medium",
+  }),
+  pluginHeadings(),
+  pluginImage(),
+];
 
-const plugins = quickStartViewerPlugins();
+const RichContentViewer = ({ richContent }: { richContent: RichContent }) => {
+  return <RicosViewer content={toDraft(richContent)} plugins={plugins} />;
+};
 
-const RichContentViewer = ({ content }) => {
-    return <RicosViewer content={content} plugins={plugins} />;
-  };
-  export default RichContentViewer;
-  
+export default RichContentViewer;

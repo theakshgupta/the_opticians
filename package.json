@@ -39,10 +39,17 @@
     "react-phone-number-input": "^3.4.12",
     "react-swipeable": "^7.0.2",
     "react-textarea-autosize": "^8.5.7",
+    "ricos-content": "^9",
+    "ricos-schema": "^9",
+    "ricos-viewer": "^9",
+    "sass": "^1.85.1",
     "swr": "^2.3.2",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.2",
+    "wix-rich-content-plugin-divider": "^9",
+    "wix-rich-content-plugin-headings": "^9",
+    "wix-rich-content-plugin-image": "^9",
     "zod": "^3.24.2"
   },
   "devDependencies": {

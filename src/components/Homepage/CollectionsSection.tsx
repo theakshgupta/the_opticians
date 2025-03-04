@@ -140,7 +140,7 @@ const CollectionsSection = () => {
           {/* Scrollable Slider */}
           <div
             ref={sliderRef}
-            className="overflow-x-auto scrollbar-hide flex gap-2 md:gap-4 scroll-smooth snap-x snap-mandatory"
+            className="overflow-x-auto scrollbar-hide flex gap-2 md:gap-4 scroll-smooth snap-x snap-mandatory rounded-2xl"
           >
             {collections.map((collection) => (
               <div key={collection.id} className="snap-center">

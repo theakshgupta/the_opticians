@@ -251,7 +251,7 @@ const ContactPage = () => {
 
               <Button
                 type="submit"
-                className="w-full h-11"
+                className="w-full text-base h-11"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Submitting..." : "Submit"}
